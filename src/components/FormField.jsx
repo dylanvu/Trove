@@ -3,7 +3,6 @@ import { Form, Input } from 'semantic-ui-react';
 
 const FormField = ({ attrValue, children, error, onChange, type, value }) => (
   <Form.Field error={!!error}>
-    <label htmlFor={attrValue}>{children}</label>
     <Input
       icon={error ? "warning" : null}
       id={attrValue}

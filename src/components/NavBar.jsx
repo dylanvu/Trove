@@ -1,28 +1,36 @@
 import React from 'react';
 import { Container, Menu } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const NavBar = () => (
-  <Menu
-    stackable
-    pointing
-    secondary
-    fluid
-  >
-    <Container>
-      <Menu.Item header>
-        <NavLink to="/">Trove</NavLink>
-      </Menu.Item>
-      <Menu.Menu position="right">
-        <Menu.Item>
-          <NavLink to="/signup">Sign Up</NavLink>
+  <div>
+    <div style={{
+      background: 'linear-gradient(to left, #5f2c82 , #49a09d)',
+      minHeight: '5px'
+    }}/>
+    <Menu
+      pointing
+      secondary
+      fluid
+      style={{
+        marginTop: 0
+      }}
+    >
+      <Container>
+        <Menu.Item header>
+          <Link to="/">Trove</Link>
         </Menu.Item>
-        <Menu.Item>
-          <NavLink to="/login">Log In</NavLink>
-        </Menu.Item>
-      </Menu.Menu>
-    </Container>
-  </Menu>
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Link to="/signup">Sign Up</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/login">Log In</Link>
+          </Menu.Item>
+        </Menu.Menu>
+      </Container>
+    </Menu>
+  </div>
 );
 
 export default NavBar;

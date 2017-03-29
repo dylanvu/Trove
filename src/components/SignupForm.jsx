@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Form } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Button, Form, Grid } from 'semantic-ui-react';
+import { Link } from 'react-router';
 import FormField from './FormField';
 
 class SignupForm extends React.Component {
@@ -82,67 +82,76 @@ class SignupForm extends React.Component {
         confirmPassword
       });
     }
+
+    this.setState({});
   }
 
   render() {
     return (
-      <div>
-        <h1>Sign Up</h1>
-        <Form onSubmit={this.handleSubmit}>
-          <FormField
-            attrValue="firstName"
-            error={this.state.errors.firstName}
-            onChange={this.handleChange}
-            type="text"
-            value={this.state.firstName}
-          >
-            First Name
-          </FormField>
-          <FormField
-            attrValue="lastName"
-            error={this.state.errors.lastName}
-            onChange={this.handleChange}
-            type="text"
-            value={this.state.lastName}
-          >
-            Last Name
-          </FormField>
-          <FormField
-            attrValue="email"
-            error={this.state.errors.email}
-            onChange={this.handleChange}
-            type="email"
-            value={this.state.email}
-          >
-            Email
-          </FormField>
-          <FormField
-            attrValue="password"
-            error={this.state.errors.password}
-            onChange={this.handleChange}
-            type="password"
-            value={this.state.password}
-          >
-            Password
-          </FormField>
-          <FormField
-            attrValue="confirmPassword"
-            error={this.state.errors.confirmPassword}
-            onChange={this.handleChange}
-            type="password"
-            value={this.state.confirmPassword}
-          >
-            Confirm Password
-          </FormField>
-          <Button type="submit">
-            Sign Up
-          </Button>
-        </Form>
-        <br></br>
-        <Link to="/login">
-          Already have an account? Log in ›
-        </Link>
-      </div>
+      <Grid.Row centered={true}>
+        <Grid.Column
+          computer={6}
+          tablet={8}
+          mobile={16}
+          textAlign="center"
+        >
+          <h1>Sign Up</h1>
+          <Form onSubmit={this.handleSubmit}>
+            <FormField
+              attrValue="firstName"
+              error={this.state.errors.firstName}
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.firstName}
+            >
+              First Name
+            </FormField>
+            <FormField
+              attrValue="lastName"
+              error={this.state.errors.lastName}
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.lastName}
+            >
+              Last Name
+            </FormField>
+            <FormField
+              attrValue="email"
+              error={this.state.errors.email}
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.email}
+            >
+              Email
+            </FormField>
+            <FormField
+              attrValue="password"
+              error={this.state.errors.password}
+              onChange={this.handleChange}
+              type="password"
+              value={this.state.password}
+            >
+              Password
+            </FormField>
+            <FormField
+              attrValue="confirmPassword"
+              error={this.state.errors.confirmPassword}
+              onChange={this.handleChange}
+              type="password"
+              value={this.state.confirmPassword}
+            >
+              Confirm Password
+            </FormField>
+            <Button type="submit">
+              Sign Up
+            </Button>
+          </Form>
+          <br></br>
+          <Link to="/login">
+            Already have an account? Log in ›
+          </Link>
+        </Grid.Column>
+      </Grid.Row>
     );
   }
 }
