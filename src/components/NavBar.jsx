@@ -6,14 +6,15 @@ const NavBar = () => (
   <div>
     <div style={{
       background: 'linear-gradient(to left, #5f2c82 , #49a09d)',
-      minHeight: '5px'
+      minHeight: '3px'
     }}/>
     <Menu
       pointing
       secondary
       fluid
       style={{
-        marginTop: 0
+        marginTop: 0,
+        marginBottom: 20
       }}
     >
       <Container>
