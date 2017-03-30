@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import NavBar from './NavBar';
+import Navbar from './Navbar';
 
 const Main = ({ children }) => (
   <div>
-    <NavBar />
+    <Navbar />
     <Grid container={true}>
       {children}
     </Grid>

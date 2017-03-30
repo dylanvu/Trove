@@ -59,9 +59,9 @@ class LoginForm extends React.Component {
     return (
       <Grid.Row centered={true}>
         <Grid.Column
-          computer={6}
-          tablet={8}
-          mobile={16}
+          computer={4}
+          tablet={6}
+          mobile={12}
           textAlign="center"
         >
           <h1>Log In</h1>

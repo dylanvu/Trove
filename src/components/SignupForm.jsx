@@ -5,17 +5,17 @@ import FormField from './FormField';
 
 const message = () => (
   <Grid.Column
-      computer={8}
-      tablet={8}
-      mobile={16}
-      textAlign="center"
-    >
-      <Message
-        color='teal'
-        header="You've been successfully registered!"
-        content="You can now log in!"
-      />
-      <Link to="/login">Click here to log in.</Link>
+    computer={4}
+    tablet={6}
+    mobile={12}
+    textAlign="center"
+  >
+    <Message
+      color='teal'
+      header="You've been successfully registered!"
+      content="You can now log in!"
+    />
+    <Link to="/login">Click here to log in.</Link>
   </Grid.Column>
 );
 
@@ -106,9 +106,9 @@ class SignupForm extends React.Component {
         { this.props.success
           ? message
           : <Grid.Column
-              computer={6}
-              tablet={8}
-              mobile={16}
+              computer={4}
+              tablet={6}
+              mobile={12}
               textAlign="center"
             >
               <h1>Sign Up</h1>

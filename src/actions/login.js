@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -24,6 +25,7 @@ const userLoginRequest = (user) =>
     return axios.post('/api/login', user)
       .then(({ data }) => {
         dispatch(loginSuccess(data));
+        browserHistory.push('/');
       })
       .catch((err) => {
         dispatch(loginFailure(err));
