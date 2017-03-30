@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isProcessing: false
-}
+};
 
 const signup = (state = initialState, action) => {
   switch(action.type) {

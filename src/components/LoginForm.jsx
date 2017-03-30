@@ -47,10 +47,11 @@ class LoginForm extends React.Component {
     }
 
     this.setState({ errors });
+
     const isValid = Object.keys(errors).length === 0;
 
     if (isValid) {
-      // do stuff
+      this.props.userLoginRequest({ email, password });
     }
   }
 

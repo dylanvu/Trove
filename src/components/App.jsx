@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import Main from './Main';
-import LoginForm from './LoginForm';
+import LoginFormContainer from '../containers/LoginFormContainer';
 import SignupFormContainer from '../containers/SignupFormContainer';
 
 const temp = () => (
@@ -15,7 +15,7 @@ const App = () => (
     <Route path="/" component={Main}>
       <IndexRoute component={temp}/>
       <Route path="signup" component={SignupFormContainer}/>
-      <Route path="login" component={LoginForm}/>
+      <Route path="login" component={LoginFormContainer}/>
     </Route>
   </Router>
 );
