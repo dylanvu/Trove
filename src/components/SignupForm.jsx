@@ -1,23 +1,7 @@
 import React from 'react';
-import { Button, Form, Grid, Message} from 'semantic-ui-react';
+import { Button, Form, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import FormField from './FormField';
-
-const message = () => (
-  <Grid.Column
-    computer={4}
-    tablet={6}
-    mobile={12}
-    textAlign="center"
-  >
-    <Message
-      color='teal'
-      header="You've been successfully registered!"
-      content="You can now log in!"
-    />
-    <Link to="/login">Click here to log in.</Link>
-  </Grid.Column>
-);
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -103,71 +87,68 @@ class SignupForm extends React.Component {
   render() {
     return (
       <Grid.Row centered={true}>
-        { this.props.success
-          ? message
-          : <Grid.Column
-              computer={4}
-              tablet={6}
-              mobile={12}
-              textAlign="center"
+        <Grid.Column
+          computer={4}
+          tablet={6}
+          mobile={12}
+          textAlign="center"
+        >
+          <h1>Sign Up</h1>
+          <Form onSubmit={this.handleSubmit}>
+            <FormField
+              attrValue="firstName"
+              error={this.state.errors.firstName}
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.firstName}
             >
-              <h1>Sign Up</h1>
-              <Form onSubmit={this.handleSubmit}>
-                <FormField
-                  attrValue="firstName"
-                  error={this.state.errors.firstName}
-                  onChange={this.handleChange}
-                  type="text"
-                  value={this.state.firstName}
-                >
-                  First Name
-                </FormField>
-                <FormField
-                  attrValue="lastName"
-                  error={this.state.errors.lastName}
-                  onChange={this.handleChange}
-                  type="text"
-                  value={this.state.lastName}
-                >
-                  Last Name
-                </FormField>
-                <FormField
-                  attrValue="email"
-                  error={this.state.errors.email}
-                  onChange={this.handleChange}
-                  type="text"
-                  value={this.state.email}
-                >
-                  Email
-                </FormField>
-                <FormField
-                  attrValue="password"
-                  error={this.state.errors.password}
-                  onChange={this.handleChange}
-                  type="password"
-                  value={this.state.password}
-                >
-                  Password
-                </FormField>
-                <FormField
-                  attrValue="confirmPassword"
-                  error={this.state.errors.confirmPassword}
-                  onChange={this.handleChange}
-                  type="password"
-                  value={this.state.confirmPassword}
-                >
-                  Confirm Password
-                </FormField>
-                <Button type="submit">
-                  Sign Up
-                </Button>
-              </Form>
-              <br></br>
-              <Link to="/login">
-                Already have an account? Log in ›
-              </Link>
-            </Grid.Column>
-        }
+              First Name
+            </FormField>
+            <FormField
+              attrValue="lastName"
+              error={this.state.errors.lastName}
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.lastName}
+            >
+              Last Name
+            </FormField>
+            <FormField
+              attrValue="email"
+              error={this.state.errors.email}
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.email}
+            >
+              Email
+            </FormField>
+            <FormField
+              attrValue="password"
+              error={this.state.errors.password}
+              onChange={this.handleChange}
+              type="password"
+              value={this.state.password}
+            >
+              Password
+            </FormField>
+            <FormField
+              attrValue="confirmPassword"
+              error={this.state.errors.confirmPassword}
+              onChange={this.handleChange}
+              type="password"
+              value={this.state.confirmPassword}
+            >
+              Confirm Password
+            </FormField>
+            <Button type="submit">
+              Sign Up
+            </Button>
+          </Form>
+          <br></br>
+          <Link to="/login">
+            Already have an account? Log in ›
+          </Link>
+        </Grid.Column>
       </Grid.Row>
     );
   }

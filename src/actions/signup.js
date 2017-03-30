@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -23,6 +24,7 @@ const userSignupRequest = (user) =>
     return axios.post('/api/register', user)
       .then(({ data }) => {
         dispatch(signupSuccess(data));
+        browserHistory.push('/login');
       })
       .catch((err) => {
         dispatch(signupFailure(err));
