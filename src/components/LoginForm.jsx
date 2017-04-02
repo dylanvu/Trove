@@ -1,7 +1,10 @@
 import React from 'react';
-import { Button, Form, Grid } from 'semantic-ui-react';
-import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { Button, Form, Grid, Message } from 'semantic-ui-react';
+import { browserHistory, Link } from 'react-router';
+import { loginUser } from '../actions/user';
 import FormField from './FormField';
+import validateLogin from '../utils/validateLogin';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -15,6 +18,12 @@ class LoginForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.authenticated) {
+      browserHistory.push('/dashboard');
+    }
   }
 
   handleChange(event) {
@@ -36,22 +45,14 @@ class LoginForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    const errors = {};
-
-    if (!email.trim() || !email.includes('@')) {
-      errors.email = 'Please enter a valid email.';
-    }
-
-    if (!password.trim()) {
-      errors.password = 'Please enter a valid password';
-    }
-
-    this.setState({ errors });
-
+    const errors = validateLogin(this.state);
     const isValid = Object.keys(errors).length === 0;
 
+    if (!isValid) {
+      this.setState({ errors });
+    }
     if (isValid) {
-      this.props.userLoginRequest({ email, password });
+      this.props.loginUser({ email, password });
     }
   }
 
@@ -65,6 +66,12 @@ class LoginForm extends React.Component {
           textAlign="center"
         >
           <h1>Log In</h1>
+          { this.props.error && this.props.status === 'login'
+            ? <Message negative>
+                {this.props.error}
+              </Message>
+            : null
+          }
           <Form onSubmit={this.handleSubmit}>
             <FormField
               attrValue="email"
@@ -98,4 +105,9 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+const mapStateToProps = (state) => ({ ...state.user });
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(LoginForm);

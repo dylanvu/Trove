@@ -1,7 +1,10 @@
 import React from 'react';
-import { Button, Form, Grid } from 'semantic-ui-react';
-import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { signupUser } from '../actions/user';
+import { Button, Form, Grid, Message } from 'semantic-ui-react';
+import { browserHistory, Link } from 'react-router';
 import FormField from './FormField';
+import validateSignup from '../utils/validateSignup';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -12,7 +15,7 @@ class SignupForm extends React.Component {
       lastName: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      passwordConfirmation: '',
       errors: {}
     };
 
@@ -20,10 +23,17 @@ class SignupForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.authenticated) {
+      browserHistory.push('/dashboard');
+    }
+  }
+
   handleChange(event) {
     if (!!this.state.errors[event.target.name]) {
       const errors = Object.assign({}, this.state.errors);
       delete errors[event.target.name];
+
       this.setState({
         [event.target.name]: event.target.value,
         errors
@@ -38,48 +48,26 @@ class SignupForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     const {
       firstName,
       lastName,
       email,
       password,
-      confirmPassword
+      passwordConfirmation
     } = this.state;
-
-    const errors = {};
-
-    if (!firstName.trim()) {
-      errors.firstName = 'Please enter your first name.';
-    }
-
-    if (!lastName.trim()) {
-      errors.lastName = 'Please enter your last name.';
-    }
-
-    if (!email.trim() || !email.includes('@')) {
-      errors.email = 'Please enter a valid email.';
-    }
-
-    if (!password.trim() || password.length < 8) {
-      errors.password = 'Your password must be at least 8 characters long.';
-    }
-
-    if (!confirmPassword.trim() || password !== confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match.';
-    }
-
-    this.setState({ errors });
-
+    const errors = validateSignup(this.state);
     const isValid = Object.keys(errors).length === 0;
 
-    if (isValid) {
-      this.props.userSignupRequest({
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    else {
+      this.props.signupUser({
         firstName,
         lastName,
         email,
         password,
-        confirmPassword
+        passwordConfirmation
       });
     }
   }
@@ -94,6 +82,12 @@ class SignupForm extends React.Component {
           textAlign="center"
         >
           <h1>Sign Up</h1>
+          { this.props.error && this.props.status === 'signup'
+            ? <Message negative>
+                {this.props.error}
+              </Message>
+            : null
+          }
           <Form onSubmit={this.handleSubmit}>
             <FormField
               attrValue="firstName"
@@ -132,11 +126,11 @@ class SignupForm extends React.Component {
               Password
             </FormField>
             <FormField
-              attrValue="confirmPassword"
-              error={this.state.errors.confirmPassword}
+              attrValue="passwordConfirmation"
+              error={this.state.errors.passwordConfirmation}
               onChange={this.handleChange}
               type="password"
-              value={this.state.confirmPassword}
+              value={this.state.passwordConfirmation}
             >
               Confirm Password
             </FormField>
@@ -154,4 +148,9 @@ class SignupForm extends React.Component {
   }
 }
 
-export default SignupForm;
+const mapStateToProps = (state) => ({ ...state.user });
+
+export default connect(
+  mapStateToProps,
+  { signupUser }
+)(SignupForm);
