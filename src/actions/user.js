@@ -1,22 +1,10 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
-// Sign up user
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
-// Log in/out user
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGOUT = 'LOGOUT';
-
-// Authenticate
-export const AUTHENTICATE = 'AUTHENTICATE';
-export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
-
-// Actions
 function signupRequest() {
   return {
     type: SIGNUP_REQUEST
@@ -35,6 +23,25 @@ function signupFailure(error) {
     error
   };
 }
+
+export function signupUser(user) {
+  return (dispatch) => {
+    dispatch(signupRequest());
+    return axios.post('/api/register', user)
+    .then((res) => {
+      dispatch(signupSuccess());
+      browserHistory.push('/login');
+    })
+    .catch((err) => {
+      dispatch(signupFailure(err.response.data));
+    });
+  };
+}
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT = 'LOGOUT';
 
 function loginRequest() {
   return {
@@ -59,35 +66,6 @@ function loginFailure(error) {
 function logout() {
   return {
     type: LOGOUT
-  };
-}
-
-function authenticate(user) {
-  return {
-    type: AUTHENTICATE,
-    user
-  };
-}
-
-function authenticateFailure(error) {
-  return {
-    type: AUTHENTICATE_FAILURE,
-    error
-  };
-}
-
-// Thunks
-export function signupUser(user) {
-  return (dispatch) => {
-    dispatch(signupRequest());
-    return axios.post('/api/register', user)
-    .then((res) => {
-      dispatch(signupSuccess());
-      browserHistory.push('/login');
-    })
-    .catch((err) => {
-      dispatch(signupFailure(err.response.data));
-    });
   };
 }
 
@@ -117,6 +95,23 @@ export function logoutUser() {
         console.error(err);
       });
   }
+}
+
+export const AUTHENTICATE = 'AUTHENTICATE';
+export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
+
+function authenticate(user) {
+  return {
+    type: AUTHENTICATE,
+    user
+  };
+}
+
+function authenticateFailure(error) {
+  return {
+    type: AUTHENTICATE_FAILURE,
+    error
+  };
 }
 
 export function authenticateUser() {

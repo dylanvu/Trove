@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import fetchLists from '../actions/getLists';
+import fetchLists from '../actions/lists';
 
 class Lists extends React.Component {
   componentWillMount() {
@@ -10,11 +10,10 @@ class Lists extends React.Component {
   };
 
   render() {
-    const { defaultList, privateLists, sharedLists, isFetching } = this.props;
+    const { defaultList, privateLists, sharedLists } = this.props;
     return (
       <div>
         <h1>My List</h1>
-        <p>{ isFetching ? 'loading...' : 'done!' }</p>
         <ul>
           <li>{ defaultList.name }</li>
           <hr/>

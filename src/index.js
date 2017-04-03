@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-import App from './components/App';
+import Root from './components/Root';
 import rootReducer from './reducers/rootReducer';
 import './index.css';
 import '../semantic/dist/semantic.min.css';
@@ -26,11 +26,11 @@ const wrapApp = (AppComponent, reduxStore) => (
 
 const rootEl = document.getElementById('root');
 
-ReactDOM.render(wrapApp(App, store), rootEl);
+ReactDOM.render(wrapApp(Root, store), rootEl);
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NextApp = require('./components/App').default;
+  module.hot.accept('./components/Root', () => {
+    const NextApp = require('./components/Root').default;
     ReactDOM.render(wrapApp(NextApp, store), rootEl);
   });
 }

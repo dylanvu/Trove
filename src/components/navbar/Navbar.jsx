@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Dropdown, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/user';
+import { logoutUser } from '../../actions/user';
 
 import './Navbar.css';
 

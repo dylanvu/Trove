@@ -2,7 +2,7 @@ import {
   FETCH_LISTS_REQUEST,
   FETCH_LISTS_SUCCESS,
   FETCH_LISTS_FAILURE
-} from '../actions/getLists';
+} from '../actions/lists';
 
 const initialState = {
   isFetching: false,
