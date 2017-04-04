@@ -5,26 +5,26 @@ exports.seed = (knex) => {
     .then(() => {
       return knex('users').insert([{
         id: 1,
-        first_name: 'Sushi',
-        last_name: 'Sushi',
-        email: 'sushi@sushi.com',
-        hashed_password: '$2a$12$HdwBMbQjPNUfwfHqBV3jbO9oK5JIXM50J8u.ho3wC9q5I5vYj7/1O',
+        first_name: 'Dylan',
+        last_name: 'Vu',
+        email: 'dylan@gmail.com',
+        hashed_password: '$2a$12$LgAfRsujSUcgFz/ksxq.ruinhU4jHJXDhH3Xa3tof0UBc./QVEg7K',
         created_at: new Date(),
         updated_at: new Date()
       }, {
         id: 2,
-        first_name: 'Ramen',
-        last_name: 'Ramen',
-        email: 'ramen@ramen.com',
-        hashed_password: '$2a$12$HdwBMbQjPNUfwfHqBV3jbO9oK5JIXM50J8u.ho3wC9q5I5vYj7/1O',
+        first_name: 'Roshella',
+        last_name: 'Gonzales',
+        email: 'roshella@gmail.com',
+        hashed_password: '$2a$12$LgAfRsujSUcgFz/ksxq.ruinhU4jHJXDhH3Xa3tof0UBc./QVEg7K',
         created_at: new Date(),
         updated_at: new Date()
       }, {
         id: 3,
-        first_name: 'Poke',
-        last_name: 'Poke',
-        email: 'poke@poke.com',
-        hashed_password: '$2a$12$HdwBMbQjPNUfwfHqBV3jbO9oK5JIXM50J8u.ho3wC9q5I5vYj7/1O',
+        first_name: 'Danny',
+        last_name: 'Vu',
+        email: 'danny@gmail.com',
+        hashed_password: '$2a$12$LgAfRsujSUcgFz/ksxq.ruinhU4jHJXDhH3Xa3tof0UBc./QVEg7K',
         created_at: new Date(),
         updated_at: new Date()
       }]);

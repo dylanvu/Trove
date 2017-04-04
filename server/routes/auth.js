@@ -4,7 +4,7 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const ev = require('express-validation');
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const knex = require('../../database/knex');
+const knex = require('../knex');
 const validations = require('../validations/users');
 
 const router = express.Router(); // eslint-disable-line new-cap

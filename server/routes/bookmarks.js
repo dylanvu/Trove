@@ -1,7 +1,7 @@
 const authorize = require('../helpers/authorize');
 const { camelizeKeys } = require('humps');
 const express = require('express');
-const knex = require('../../database/knex');
+const knex = require('../knex');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
