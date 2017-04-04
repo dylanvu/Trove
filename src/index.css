@@ -4,6 +4,10 @@ body {
   font-family: 'Source Sans Pro', sans-serif !important;
 }
 
+h1, h2 {
+  font-family: 'Source Sans Pro', sans-serif !important;
+}
+
 .item {
   border: none !important;
 }

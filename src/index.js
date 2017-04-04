@@ -15,7 +15,10 @@ const loggerMiddleware = createLogger();
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware, loggerMiddleware)
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )
 );
 
 const wrapApp = (AppComponent, reduxStore) => (
