@@ -5,71 +5,57 @@ export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
-function signupRequest() {
-  return {
-    type: SIGNUP_REQUEST
-  };
-}
+const signupRequest = () => ({
+  type: SIGNUP_REQUEST
+});
 
-function signupSuccess() {
-  return {
-    type: SIGNUP_SUCCESS
-  };
-}
+const signupSuccess = () => ({
+  type: SIGNUP_SUCCESS
+});
 
-function signupFailure(error) {
-  return {
-    type: SIGNUP_FAILURE,
-    error
-  };
-}
+const signupFailure = (error) => ({
+  type: SIGNUP_FAILURE,
+  error
+});
 
-export function signupUser(user) {
+export const signupUser = (user) => {
   return (dispatch) => {
     dispatch(signupRequest());
     return axios.post('/api/register', user)
     .then((res) => {
       dispatch(signupSuccess());
-      browserHistory.push('/login');
     })
     .catch((err) => {
       dispatch(signupFailure(err.response.data));
     });
-  };
-}
+  }
+};
+
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
-function loginRequest() {
-  return {
-    type: LOGIN_REQUEST
-  };
-}
+const loginRequest = () => ({
+  type: LOGIN_REQUEST
+});
 
-function loginSuccess(user) {
-  return {
-    type: LOGIN_SUCCESS,
-    user
-  };
-}
+const loginSuccess = (user) => ({
+  type: LOGIN_SUCCESS,
+  user
+});
 
-function loginFailure(error) {
-  return {
-    type: LOGIN_FAILURE,
-    error
-  };
-}
+const loginFailure = (error) => ({
+  type: LOGIN_FAILURE,
+  error
+});
 
-function logout() {
-  return {
-    type: LOGOUT
-  };
-}
+const logout = () => ({
+  type: LOGOUT
+});
 
-export function loginUser(user) {
+export const loginUser = (user) => {
   return (dispatch) => {
     dispatch(loginRequest());
     return axios.post('/api/login', user)
@@ -80,48 +66,44 @@ export function loginUser(user) {
       .catch((err) => {
         dispatch(loginFailure(err.response.data));
       });
-  };
-}
+  }
+};
 
-export function logoutUser() {
-  return dispatch => {
+export const logoutUser = () => {
+  return (dispatch) => {
     return axios.delete('/api/logout')
       .then(() => {
         dispatch(logout());
-        browserHistory.push('/');
-        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
       });
-  }
-}
+  };
+};
 
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
 
-function authenticate(user) {
-  return {
-    type: AUTHENTICATE,
-    user
-  };
-}
+const authenticate = (user) => ({
+  type: AUTHENTICATE,
+  user
+});
 
-function authenticateFailure(error) {
-  return {
-    type: AUTHENTICATE_FAILURE,
-    error
-  };
-}
+const authenticateFailure = (error) => ({
+  type: AUTHENTICATE_FAILURE,
+  error
+});
 
-export function authenticateUser() {
+export const authenticateUser = () => {
   return (dispatch) => {
     return axios.get('/api/token')
     .then((res) => {
       dispatch(authenticate(res.data));
+      browserHistory.push('/dashboard');
     })
     .catch((err) => {
       dispatch(authenticateFailure(err.response.data));
+      browserHistory.push('/login');
     });
   };
-}
+};
