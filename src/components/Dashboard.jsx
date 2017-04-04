@@ -7,15 +7,15 @@ const Dashboard = () => {
   return (
   <Grid.Row>
     <Grid.Column
-      computer={3}
-      tablet={6}
+      computer={2}
+      tablet={3}
       mobile={16}
     >
       <Lists/>
     </Grid.Column>
     <Grid.Column
-      computer={13}
-      tablet={10}
+      computer={14}
+      tablet={13}
       mobile={16}
 
     >

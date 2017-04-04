@@ -18,7 +18,7 @@ const Bookmarks = ({ bookmarks, selectedList }) => (
             <Card.Header>
               {bookmark.title}
             </Card.Header>
-            <Card.Meta>{bookmark.url}</Card.Meta>
+            <Card.Meta>{bookmark.urlHostname}</Card.Meta>
           </Card.Content>
         </Card>
       ))}

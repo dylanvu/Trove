@@ -21,7 +21,7 @@ class Lists extends React.Component {
       selectedList
     } = this.props;
     return (
-      <Menu vertical secondary pointing size='large'>
+      <Menu vertical secondary size='big'>
         <Menu.Item>
           <Menu.Header>My lists</Menu.Header>
           <Menu.Menu>
