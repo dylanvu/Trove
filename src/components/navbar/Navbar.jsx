@@ -1,59 +1,47 @@
 import React from 'react';
-import { Container, Dropdown, Menu } from 'semantic-ui-react';
+import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/user';
+import { logoutUser } from '../../actions/auth';
+import UserNav from './UserNav';
+import PublicNav from './PublicNav';
 
 import './Navbar.css';
 
-const PublicLinks = () => (
-  <Menu.Menu position="right">
-    <Menu.Item>
-      <Link to="/signup">Sign Up</Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link to="/login">Log In</Link>
-    </Menu.Item>
-  </Menu.Menu>
-);
-
-let UserLinks = ({ name, dispatch }) => (
-  <Menu.Menu position='right'>
-    <Dropdown
-      item
-      text={`Welcome, ${name}`
-    }>
-      <Dropdown.Menu>
-        <Dropdown.Item>
-          <Link to='/dashboard'>Dashboard</Link>
-        </Dropdown.Item>
-        <Dropdown.Item>
-          <Link to='/' onClick={() => dispatch(logoutUser())}>Sign out</Link>
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  </Menu.Menu>
-)
-UserLinks = connect()(UserLinks);
-
-const Navbar = ({ user, authenticated }) => (
+const Navbar = ({ authenticated, logoutUser, user }) => (
   <div>
     <div className='gradient'/>
     <Menu
       id='nav'
       fluid
     >
-      <Container>
+      <Container style={{ width: '1400px'}}>
         <Menu.Item header>
-          <Link to="/">Trove</Link>
+          <Link to="/">
+            <h2 id='nav-title'>Trove</h2>
+          </Link>
         </Menu.Item>
         { authenticated
-          ? <UserLinks name={user.firstName}/>
-          : <PublicLinks />
+          ? <UserNav
+              name={user.firstName}
+              onClick={logoutUser}
+            />
+          : <PublicNav />
         }
       </Container>
     </Menu>
   </div>
 );
 
-export default Navbar;
+Navbar.propTypes = {
+  authenticated: React.PropTypes.bool.isRequired,
+  logoutUser: React.PropTypes.func.isRequired,
+  user: React.PropTypes.object
+};
+
+const mapStateToProps = (state) => ({ ...state.auth });
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);
