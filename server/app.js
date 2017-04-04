@@ -1,23 +1,19 @@
 require('dotenv').config();
-const path = require('path');
-const express = require('express');
-const compression = require('compression');
-const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
 
 const app = express();
+app.use(cors());
 
 app.use(compression());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.use('/api', require('./routes/auth'));
 app.use('/api', require('./routes/lists'));
