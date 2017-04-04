@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import Navbar from './navbar/Navbar';
 import wrapAuth from '../utils/wrapAuth';
 
@@ -8,10 +8,16 @@ const WrappedNav = wrapAuth(Navbar);
 const App = ({ children }) => (
   <div>
     <WrappedNav />
-    <Grid container={true}>
-      {children}
-    </Grid>
+    <Container style={{ width: '1400px'}}>
+      <Grid>
+        {children}
+      </Grid>
+    </Container>
   </div>
 );
+
+App.propTypes ={
+  children: React.PropTypes.element.isRequired
+};
 
 export default App;

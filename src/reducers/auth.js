@@ -8,7 +8,7 @@ import {
   LOGOUT,
   AUTHENTICATE,
   AUTHENTICATE_FAILURE
-} from '../actions/user';
+} from '../actions/auth';
 
 const initialState = {
   user: null,
@@ -18,7 +18,7 @@ const initialState = {
   authenticated: false
 };
 
-const user = (state = initialState, action) => {
+const auth = (state = initialState, action) => {
   switch(action.type) {
     case SIGNUP_REQUEST:
       return {
@@ -106,4 +106,4 @@ const user = (state = initialState, action) => {
   }
 };
 
-export default user;
+export default auth;

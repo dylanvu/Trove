@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
-import user from './user';
+import auth from './auth';
 import lists from './lists';
+import selectedList from './selectedList';
+import bookmarks from './bookmarks';
 
 const rootReducer = combineReducers({
-  user,
-  lists
+  auth,
+  lists,
+  selectedList,
+  bookmarks
 });
 
 export default rootReducer;

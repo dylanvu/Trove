@@ -1,20 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { browserHistory} from 'react-router';
-import { authenticateUser } from '../actions/user';
+import { authenticateUser } from '../actions/auth';
 
 export default function wrapAuth(WrappedComponent) {
   class Auth extends React.Component {
-
     componentWillMount() {
       if (!this.props.authenticated) {
-        browserHistory.push('/login');
-      }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (!nextProps.authenticated) {
-        browserHistory.push('/login');
+        this.props.authenticateUser();
       }
     }
 
@@ -25,7 +17,7 @@ export default function wrapAuth(WrappedComponent) {
     }
   }
 
-  const mapStateToProps = (state) => ({ ...state.user });
+  const mapStateToProps = (state) => ({ ...state.auth });
 
   return connect(
     mapStateToProps,
