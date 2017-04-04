@@ -1,5 +1,3 @@
-'use strict';
-
 const authorize = require('../helpers/authorize');
 const { camelizeKeys } = require('humps');
 const express = require('express');

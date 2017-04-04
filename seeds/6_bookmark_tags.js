@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint-disable camelcase, no-console */
 
 exports.seed = (knex) => {

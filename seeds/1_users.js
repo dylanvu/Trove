@@ -1,5 +1,4 @@
 /* eslint-disable camelcase, no-console */
-'use strict';
 
 exports.seed = (knex) => {
   return knex('users').del()

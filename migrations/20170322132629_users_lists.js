@@ -1,5 +1,4 @@
 /* eslint-disable linebreak-style */
-'use strict';
 
 exports.up = (knex) => {
   return knex.schema.createTable('users_lists', (table) => {
