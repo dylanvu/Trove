@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Message } from 'semantic-ui-react';
 import { browserHistory, Link } from 'react-router';
-import { loginUser } from '../../actions/user';
-import FormField from '../common/FormField';
 import validateLogin from './validateLogin';
+import FormField from '../common/FormField';
+import { loginUser } from '../../actions/auth';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -44,7 +44,6 @@ class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { email, password } = this.state;
     const errors = validateLogin(this.state);
     const isValid = Object.keys(errors).length === 0;
 
@@ -52,7 +51,7 @@ class LoginForm extends React.Component {
       this.setState({ errors });
     }
     if (isValid) {
-      this.props.loginUser({ email, password });
+      this.props.loginUser(this.state);
     }
   }
 
@@ -62,8 +61,8 @@ class LoginForm extends React.Component {
         <h1>Log In</h1>
         { this.props.error && this.props.status === 'login'
           ? <Message negative>
-            {this.props.error}
-          </Message>
+              {this.props.error}
+            </Message>
           : null
         }
         <FormField
@@ -96,7 +95,14 @@ class LoginForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ ...state.user });
+LoginForm.propTypes = {
+  authenticated: React.PropTypes.bool.isRequired,
+  error: React.PropTypes.string,
+  loginUser: React.PropTypes.func.isRequired,
+  status: React.PropTypes.string.isRequired
+};
+
+const mapStateToProps = (state) => ({ ...state.auth });
 
 export default connect(
   mapStateToProps,
