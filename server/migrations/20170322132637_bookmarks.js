@@ -10,10 +10,10 @@ exports.up = (knex) => {
       .onDelete('CASCADE')
       .index();
     table.string('title').notNullable();
-    table.string('desc').notNullable().defaultTo('No description');
     table.string('url').notNullable();
+    table.string('url_hostname').notNullable();
     table.string('img_url').notNullable()
-      .defaultTo('https://placehold.it/500x500');
+      .defaultTo('https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png');
     table.timestamps(true, true);
   });
 };
