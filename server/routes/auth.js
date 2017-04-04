@@ -4,31 +4,26 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 const ev = require('express-validation');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const authorize = require('../helpers/authorize');
 const knex = require('../knex');
 const validations = require('../validations/users');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.get('/token', (req, res, next) => {
-  jwt.verify(req.cookies.token, process.env.JWT_KEY, (error, payload) => {
-    if (error) {
-      next(boom.create(403, 'Not logged in.'));
-    }
+router.get('/token', authorize, (req, res, next) => {
+  knex.select('*')
+    .from('users')
+    .where('users.id', req.claim.userId)
+    .first()
+    .then((userRow) => {
+      const user = camelizeKeys(userRow);
 
-    knex.select('*')
-      .from('users')
-      .where('users.id', payload.userId)
-      .first()
-      .then((userRow) => {
-        const user = camelizeKeys(userRow);
-
-        delete user.hashedPassword;
-        res.send(user);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  });
+      delete user.hashedPassword;
+      res.send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.post('/register', ev(validations.register), (req, res, next) => {
