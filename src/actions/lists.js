@@ -17,8 +17,8 @@ const fetchListsFailure = () => ({
   type: FETCH_LISTS_FAILURE
 });
 
-const fetchLists = () =>
-  (dispatch) => {
+export const fetchLists = () => {
+  return (dispatch) => {
     dispatch(fetchListsRequest());
     return axios('/api/lists')
       .then(({ data }) => {
@@ -28,5 +28,4 @@ const fetchLists = () =>
         dispatch(fetchListsFailure());
       });
   };
-
-export default fetchLists;
+};
