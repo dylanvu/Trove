@@ -74,7 +74,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "knex": "knex",
-    "heroku-postbuild": "knex migrate:latest"
+    "heroku-postbuild": "knex --knexfile ./server/knexfile.js migrate:latest"
   },
   "proxy": "http://localhost:3001",
   "engines": {

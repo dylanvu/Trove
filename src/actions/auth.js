@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import { fetchLists } from './lists';
+import { fetchBookmarks } from './bookmarks';
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -99,6 +101,8 @@ export const authenticateUser = () => {
     return axios.get('/api/token')
     .then((res) => {
       dispatch(authenticate(res.data));
+      dispatch(fetchLists());
+      dispatch(fetchBookmarks());
       browserHistory.push('/dashboard');
     })
     .catch((err) => {
