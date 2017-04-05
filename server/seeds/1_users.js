@@ -7,7 +7,7 @@ exports.seed = (knex) => {
         id: 1,
         first_name: 'Dylan',
         last_name: 'Vu',
-        email: 'dylan@gmail.com',
+        email: 'dylan.vu@gmail.com',
         hashed_password: '$2a$12$LgAfRsujSUcgFz/ksxq.ruinhU4jHJXDhH3Xa3tof0UBc./QVEg7K',
         created_at: new Date(),
         updated_at: new Date()

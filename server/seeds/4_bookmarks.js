@@ -6,10 +6,10 @@ exports.seed = (knex) => {
       return knex('bookmarks').insert([{
         id: 1,
         list_id: 1,
-        title: 'methodology',
-        url: 'https://utexas.edu',
-        url_hostname: 'https://utexas.edu',
-        img_url: 'http://dummyimage.com/180x180.png/cc0000/ffffff',
+        title: '',
+        url: 'https://facebook.github.io/react/docs/optimizing-performance.html',
+        url_hostname: 'facebook.github.io',
+        img_url: 'https://facebook.github.io/react/img/logo_og.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -18,7 +18,7 @@ exports.seed = (knex) => {
         title: 'hybrid',
         url: 'http://adobe.com',
         url_hostname: 'http://adobe.com',
-        img_url: 'http://dummyimage.com/180x180.jpg/5fa2dd/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -27,16 +27,16 @@ exports.seed = (knex) => {
         title: 'Horizontal',
         url: 'http://smugmug.com',
         url_hostname: 'http://smugmug.com',
-        img_url: 'http://dummyimage.com/180x180.jpg/dddddd/000000',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
         id: 4,
         list_id: 4,
-        title: 'Implemented',
-        url: 'https://storify.com',
-        url_hostname: 'https://storify.com',
-        img_url: 'http://dummyimage.com/180x180.bmp/5fa2dd/ffffff',
+        title: 'goPoke',
+        url: 'https://www.yelp.com/biz/gopok%C3%A9-seattle-5',
+        url_hostname: 'www.yelp.com',
+        img_url: 'https://s3-media1.fl.yelpcdn.com/bphoto/KNApvM96tLM7TPqQhOLQrA/o.jpg',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -45,7 +45,7 @@ exports.seed = (knex) => {
         title: 'modular',
         url: 'http://usda.gov',
         url_hostname: 'http://usda.gov',
-        img_url: 'http://dummyimage.com/180x180.png/dddddd/000000',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -54,7 +54,7 @@ exports.seed = (knex) => {
         title: 'portal',
         url: 'https://amazonaws.com',
         url_hostname: 'https://amazonaws.com',
-        img_url: 'http://dummyimage.com/180x180.png/cc0000/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -63,16 +63,16 @@ exports.seed = (knex) => {
         title: 'Synchronised',
         url: 'http://sciencedirect.com',
         url_hostname: 'http://sciencedirect.com',
-        img_url: 'http://dummyimage.com/180x180.bmp/cc0000/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
         id: 8,
         list_id: 1,
-        title: 'zero tolerance',
-        url: 'http://statcounter.com',
-        url_hostname: 'http://statcounter.com',
-        img_url: 'http://dummyimage.com/180x180.bmp/dddddd/000000',
+        title: 'Redux',
+        url: 'http://redux.js.org/',
+        url_hostname: 'redux.js.org',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -81,7 +81,7 @@ exports.seed = (knex) => {
         title: 'Fundamental',
         url: 'https://parallels.com',
         url_hostname: 'https://parallels.com',
-        img_url: 'http://dummyimage.com/180x180.png/cc0000/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -90,7 +90,7 @@ exports.seed = (knex) => {
         title: 'hardware',
         url: 'http://yolasite.com',
         url_hostname: 'http://yolasite.com',
-        img_url: 'http://dummyimage.com/180x180.jpg/cc0000/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -99,7 +99,7 @@ exports.seed = (knex) => {
         title: 'collaboration',
         url: 'https://blinklist.com',
         url_hostname: 'https://blinklist.com',
-        img_url: 'http://dummyimage.com/180x180.png/5fa2dd/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -108,7 +108,7 @@ exports.seed = (knex) => {
         title: 'paradigm',
         url: 'http://mysql.com',
         url_hostname: 'http://mysql.com',
-        img_url: 'http://dummyimage.com/180x180.bmp/5fa2dd/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -117,7 +117,7 @@ exports.seed = (knex) => {
         title: 'Enterprise-wide',
         url: 'https://mayoclinic.com',
         url_hostname: 'https://mayoclinic.com',
-        img_url: 'http://dummyimage.com/180x180.bmp/ff4444/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }, {
@@ -126,7 +126,7 @@ exports.seed = (knex) => {
         title: 'project',
         url: 'https://yale.edu',
         url_hostname: 'https://yale.edu',
-        img_url: 'http://dummyimage.com/180x180.bmp/ff4444/ffffff',
+        img_url: 'https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_newspaper_512px_GREY.png',
         created_at: new Date(),
         updated_at: new Date()
       }]);

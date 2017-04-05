@@ -30,7 +30,7 @@ exports.seed = (knex) => {
       }, {
         id: 4,
         owner_id: 1,
-        name: 'platea',
+        name: 'Food',
         default: false,
         shared: true,
         created_at: new Date(),
@@ -38,7 +38,7 @@ exports.seed = (knex) => {
       }, {
         id: 5,
         owner_id: 1,
-        name: 'sapien',
+        name: 'Code',
         default: false,
         shared: false,
         created_at: new Date(),
@@ -46,7 +46,7 @@ exports.seed = (knex) => {
       }, {
         id: 6,
         owner_id: 1,
-        name: 'nulla',
+        name: 'Travel',
         default: false,
         shared: true,
         created_at: new Date(),
@@ -54,7 +54,7 @@ exports.seed = (knex) => {
       }, {
         id: 7,
         owner_id: 2,
-        name: 'volutpat',
+        name: 'Food',
         default: false,
         shared: true,
         created_at: new Date(),
