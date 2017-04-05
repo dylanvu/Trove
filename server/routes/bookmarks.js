@@ -1,10 +1,9 @@
 const axios = require('axios');
 const { camelizeKeys, decamelizeKeys } = require('humps');
-const cheerio = require('cheerio');
 const express = require('express');
-const url = require('url');
-const authorize = require('../helpers/authorize');
 const knex = require('../knex');
+const authorize = require('../helpers/authorize');
+const parseBookmark = require('../helpers/parseBookmark');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -26,30 +25,7 @@ router.post('/bookmarks', (req, res, next) => {
   const { bookmarkUrl, listId } = req.body;
   axios.get(bookmarkUrl)
     .then((response) => {
-      const $ = cheerio.load(response.data);
-      const bookmark = {};
-
-      bookmark.listId = listId;
-
-      if (!$('meta[property="og:title"]').attr('content')) {
-        bookmark.title = $('title').text();
-      }
-      else {
-        bookmark.title = $('meta[property="og:title"]').attr('content');
-      };
-
-      bookmark.urlHostname = url.parse(bookmarkUrl, true, true).hostname;
-
-      if ($('meta[property="og:url"]').attr('content')) {
-        bookmark.url = $('meta[property="og:url"]').attr('content');
-      }
-      else {
-        bookmark.url = bookmarkUrl;
-      }
-
-      if ($('meta[property="og:image"]').attr('content')) {
-        bookmark.imgUrl = $('meta[property="og:image"]').attr('content');
-      }
+      const bookmark = parseBookmark(response.data, bookmarkUrl, listId);
 
       return knex('bookmarks')
         .insert(decamelizeKeys(bookmark), '*');
