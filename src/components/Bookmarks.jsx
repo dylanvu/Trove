@@ -8,14 +8,13 @@ const Bookmarks = ({ bookmarks, selectedList }) => (
     <Card.Group>
       { bookmarks.map((bookmark) => (
         <Card
-          as='a'
           href={bookmark.url}
           key={bookmark.id}
           target='_blank'
         >
           <Image src={bookmark.imgUrl} fluid/>
           <Card.Content>
-            <Card.Header>
+            <Card.Header id='truncate'>
               {bookmark.title}
             </Card.Header>
             <Card.Meta>{bookmark.urlHostname}</Card.Meta>

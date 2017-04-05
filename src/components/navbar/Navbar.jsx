@@ -2,13 +2,12 @@ import React from 'react';
 import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/auth';
 import UserNav from './UserNav';
 import PublicNav from './PublicNav';
 
 import './Navbar.css';
 
-const Navbar = ({ authenticated, logoutUser, user }) => (
+const Navbar = ({ authenticated }) => (
   <div>
     <div className='gradient'/>
     <Menu
@@ -22,10 +21,7 @@ const Navbar = ({ authenticated, logoutUser, user }) => (
           </Link>
         </Menu.Item>
         { authenticated
-          ? <UserNav
-              name={user.firstName}
-              onClick={logoutUser}
-            />
+          ? <UserNav/>
           : <PublicNav />
         }
       </Container>
@@ -39,9 +35,8 @@ Navbar.propTypes = {
   user: React.PropTypes.object
 };
 
-const mapStateToProps = (state) => ({ ...state.auth });
+const mapStateToProps = (state) => ({
+  authenticated: state.auth.authenticated
+});
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Navbar);
+export default connect(mapStateToProps)(Navbar);

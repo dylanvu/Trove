@@ -16,3 +16,10 @@ h1, h2 {
   border: none !important;
   background: none !important;
 }
+
+#truncate {
+  width: 200px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
