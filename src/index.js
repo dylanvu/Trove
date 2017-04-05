@@ -21,6 +21,7 @@ const store = createStore(
   )
 );
 
+// wrap app
 const wrapApp = (AppComponent, reduxStore) => (
   <Provider store={reduxStore}>
     <AppComponent />
