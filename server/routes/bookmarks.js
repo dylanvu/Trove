@@ -22,16 +22,17 @@ router.get('/bookmarks/:listId', authorize, (req, res, next) => {
     });
 });
 
-router.post('/bookmarks', (req, res, next) => {
+router.post('/bookmarks', authorize, (req, res, next) => {
   let { bookmarkUrl, listId } = req.body;
 
   if (!bookmarkUrl.match(/^[a-zA-Z]+:\/\//)) {
     bookmarkUrl = 'http://' + bookmarkUrl;
   }
 
+  // TODO: prevent duplicate bookmarks per list
+
   axios.get(bookmarkUrl)
     .then((response) => {
-      console.log(response.data);
       const bookmark = parseBookmark(response.data, bookmarkUrl, listId);
 
       return knex('bookmarks')
