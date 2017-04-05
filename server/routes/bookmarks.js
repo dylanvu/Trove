@@ -25,12 +25,13 @@ router.get('/bookmarks/:listId', authorize, (req, res, next) => {
 router.post('/bookmarks', (req, res, next) => {
   let { bookmarkUrl, listId } = req.body;
 
-  if (!bookmarkUrl.includes('http://') || !bookmarkUrl.includes('https://')) {
-    bookmarkUrl = `https://${bookmarkUrl}`;
+  if (!bookmarkUrl.match(/^[a-zA-Z]+:\/\//)) {
+    bookmarkUrl = 'http://' + bookmarkUrl;
   }
 
   axios.get(bookmarkUrl)
     .then((response) => {
+      console.log(response.data);
       const bookmark = parseBookmark(response.data, bookmarkUrl, listId);
 
       return knex('bookmarks')

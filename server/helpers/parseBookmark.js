@@ -12,15 +12,15 @@ const parseBookmark = (data, bookmarkUrl, listId) => {
   if ($('meta[property="og:title"]').attr('content')) {
     bookmark.title = $('meta[property="og:title"]').attr('content');
   }
-  else if ($('title').text() && !$('title').text().length > 255) {
+  else if ($('title').text() && $('title').text().length <= 255) {
     bookmark.title = $('title').text();
   }
   else {
-    bookmark.title = url.parse(bookmarkUrl, true, true).hostname;
+    bookmark.title = url.parse(bookmarkUrl).hostname;
   };
 
   // Get bookmark url hostname for display
-  bookmark.urlHostname = url.parse(bookmarkUrl, true, true).hostname;
+  bookmark.urlHostname = url.parse(bookmarkUrl).hostname;
 
   // Get bookmark url
   if ($('meta[property="og:url"]').attr('content')) {
@@ -35,6 +35,7 @@ const parseBookmark = (data, bookmarkUrl, listId) => {
     bookmark.imgUrl = $('meta[property="og:image"]').attr('content');
   }
 
+  console.log(bookmark);
   return bookmark;
 };
 
