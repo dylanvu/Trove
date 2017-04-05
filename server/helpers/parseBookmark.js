@@ -12,7 +12,7 @@ const parseBookmark = (data, bookmarkUrl, listId) => {
   if ($('meta[property="og:title"]').attr('content')) {
     bookmark.title = $('meta[property="og:title"]').attr('content');
   }
-  else if ($('title').text()) {
+  else if ($('title').text() && !$('title').text().length > 255) {
     bookmark.title = $('title').text();
   }
   else {

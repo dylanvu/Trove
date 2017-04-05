@@ -20,7 +20,7 @@ const fetchListsFailure = () => ({
 export const fetchLists = () => {
   return (dispatch) => {
     dispatch(fetchListsRequest());
-    return axios('/api/lists')
+    return axios.get('/api/lists')
       .then(({ data }) => {
         dispatch(fetchListsSuccess(data));
       })

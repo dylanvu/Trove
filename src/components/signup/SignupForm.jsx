@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Message } from 'semantic-ui-react';
-import { browserHistory, Link } from 'react-router';
+import { Link } from 'react-router';
 import validateSignup from './validateSignup';
 import FormField from '../common/FormField';
 import { signupUser } from '../../actions/auth';
@@ -23,11 +23,11 @@ class SignupForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
-    if (this.props.authenticated) {
-      browserHistory.push('/dashboard');
-    }
-  }
+  // componentWillMount() {
+  //   if (this.props.authenticated) {
+  //     browserHistory.push('/dashboard');
+  //   }
+  // }
 
   handleChange(event) {
     if (!!this.state.errors[event.target.name]) {
@@ -128,9 +128,9 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   authenticated: React.PropTypes.bool.isRequired,
-  error: React.PropTypes.string,
+  error: React.PropTypes.object,
   signupUser: React.PropTypes.func.isRequired,
-  status: React.PropTypes.string.isRequired
+  status: React.PropTypes.string
 };
 
 const mapStateToProps = (state) => ({ ...state.auth });

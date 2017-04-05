@@ -13,6 +13,7 @@ router.get('/bookmarks/:listId', authorize, (req, res, next) => {
   knex.select('*')
     .from('bookmarks')
     .where('list_id', listId)
+    .orderBy('created_at', 'desc')
     .then((bookmarks) => {
       res.send(camelizeKeys(bookmarks));
     })
@@ -22,7 +23,12 @@ router.get('/bookmarks/:listId', authorize, (req, res, next) => {
 });
 
 router.post('/bookmarks', (req, res, next) => {
-  const { bookmarkUrl, listId } = req.body;
+  let { bookmarkUrl, listId } = req.body;
+
+  if (!bookmarkUrl.includes('http://') || !bookmarkUrl.includes('https://')) {
+    bookmarkUrl = `https://${bookmarkUrl}`;
+  }
+
   axios.get(bookmarkUrl)
     .then((response) => {
       const bookmark = parseBookmark(response.data, bookmarkUrl, listId);

@@ -6,8 +6,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-  AUTHENTICATE,
-  AUTHENTICATE_FAILURE
+  AUTHENTICATION_REQUEST,
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILURE
 } from '../actions/auth';
 
 const initialState = {
@@ -83,20 +84,29 @@ const auth = (state = initialState, action) => {
         loading: false,
         authenticated: false
       };
-    case AUTHENTICATE:
+    case AUTHENTICATION_REQUEST:
+      return {
+        ...state,
+        user: null,
+        status: 'authentication',
+        error: null,
+        loading: true,
+        authenticated: false
+      };
+    case AUTHENTICATION_SUCCESS:
       return {
         ...state,
         user: action.user,
-        status: 'authenticate',
+        status: 'authentication',
         error: null,
         loading: false,
         authenticated: true
       };
-    case AUTHENTICATE_FAILURE:
+    case AUTHENTICATION_FAILURE:
       return {
         ...state,
         user: null,
-        status: 'authenticate',
+        status: 'authentication',
         error: action.error,
         loading: false,
         authenticated: false

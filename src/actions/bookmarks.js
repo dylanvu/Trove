@@ -20,7 +20,7 @@ const fetchBookmarksFailure = () => ({
 export const fetchBookmarks = (listId) => {
   return (dispatch) => {
     dispatch(fetchBookmarksRequest());
-    return axios(`/api/bookmarks/${listId}`)
+    return axios.get(`/api/bookmarks/${listId}`)
       .then(({ data }) => {
         dispatch(fetchBookmarksSuccess(data));
       })
@@ -29,3 +29,31 @@ export const fetchBookmarks = (listId) => {
       });
   };
 };
+
+export const ADD_BOOKMARK_SUCCESS = 'ADD_BOOKMARK_SUCCESS';
+export const ADD_BOOKMARK_FAILURE = 'ADD_BOOKMARK_FAILURE';
+
+const addBookmarkSuccess = () => ({
+  type: ADD_BOOKMARK_SUCCESS,
+  message: 'Bookmark added'
+});
+
+const addBookmarkFailure = (error) => ({
+  type: ADD_BOOKMARK_FAILURE,
+  error
+});
+
+export const addBookmark = (bookmark) => {
+  return (dispatch) => {
+    return axios.post('/api/bookmarks', bookmark)
+      .then(({data}) => {
+        dispatch(addBookmarkSuccess());
+      })
+      .then(() => {
+        dispatch(fetchBookmarks(bookmark.listId));
+      })
+      .catch((err) => {
+        dispatch(addBookmarkFailure(err));
+      })
+  }
+}

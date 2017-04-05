@@ -31,7 +31,7 @@ const Navbar = ({ authenticated }) => (
 
 Navbar.propTypes = {
   authenticated: React.PropTypes.bool.isRequired,
-  logoutUser: React.PropTypes.func.isRequired,
+  logoutUser: React.PropTypes.func,
   user: React.PropTypes.object
 };
 

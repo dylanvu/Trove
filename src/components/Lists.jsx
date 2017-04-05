@@ -7,8 +7,7 @@ import { fetchBmFromList } from '../actions/selectList';
 class Lists extends React.Component {
   componentWillMount() {
     if (this.props.authenticated) {
-      this.props.fetchLists();
-      this.props.fetchBmFromList(this.props.defaultList);
+      this.props.fetchBmFromList(this.props.defaultList)
     }
   }
 
@@ -21,7 +20,7 @@ class Lists extends React.Component {
       selectedList
     } = this.props;
     return (
-      <Menu vertical secondary size='big'>
+      <Menu vertical secondary size='massive'>
         <Menu.Item>
           <Menu.Header>My lists</Menu.Header>
           <Menu.Menu>

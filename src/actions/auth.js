@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { fetchLists } from './lists';
-import { fetchBookmarks } from './bookmarks';
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -26,6 +25,7 @@ export const signupUser = (user) => {
     return axios.post('/api/register', user)
     .then((res) => {
       dispatch(signupSuccess());
+      browserHistory.push('/login');
     })
     .catch((err) => {
       dispatch(signupFailure(err.response.data));
@@ -63,6 +63,7 @@ export const loginUser = (user) => {
     return axios.post('/api/login', user)
       .then((res) => {
         dispatch(loginSuccess(res.data));
+        dispatch(fetchLists());
         browserHistory.push('/dashboard');
       })
       .catch((err) => {
@@ -83,31 +84,36 @@ export const logoutUser = () => {
   };
 };
 
-export const AUTHENTICATE = 'AUTHENTICATE';
-export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
+export const AUTHENTICATION_REQUEST = 'AUTHENTICATION_REQUEST';
+export const AUTHENTICATION_SUCCESS = 'AUTHENTICATION_SUCCESS';
+export const AUTHENTICATION_FAILURE = 'AUTHENTICATION_FAILURE';
 
-const authenticate = (user) => ({
-  type: AUTHENTICATE,
+const authenticationRequest = () => ({
+  type: AUTHENTICATION_REQUEST
+});
+
+const authenticationSuccess = (user) => ({
+  type: AUTHENTICATION_SUCCESS,
   user
 });
 
-const authenticateFailure = (error) => ({
-  type: AUTHENTICATE_FAILURE,
+const authenticationFailure = (error) => ({
+  type: AUTHENTICATION_FAILURE,
   error
 });
 
 export const authenticateUser = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    authenticationRequest();
     return axios.get('/api/token')
-    .then((res) => {
-      dispatch(authenticate(res.data));
-      dispatch(fetchLists());
-      dispatch(fetchBookmarks());
-      browserHistory.push('/dashboard');
-    })
-    .catch((err) => {
-      dispatch(authenticateFailure(err.response.data));
-      browserHistory.push('/login');
-    });
+      .then(({data}) => {
+        dispatch(authenticationSuccess(data));
+        dispatch(fetchLists());
+        browserHistory.push('/dashboard');
+      })
+      .catch((err) => {
+        dispatch(authenticationFailure(err));
+        browserHistory.push('/login');
+      });
   };
 };
