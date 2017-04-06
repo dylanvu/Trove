@@ -29,3 +29,36 @@ export const fetchLists = () => {
       });
   };
 };
+
+export const ADD_LISTS_REQUEST = 'ADD_LISTS_REQUEST';
+export const ADD_LISTS_SUCCESS = 'ADD_LISTS_SUCCESS';
+export const ADD_LISTS_FAILURE = 'ADD_LISTS_FAILURE';
+
+const addListsRequest = () => ({
+  type: ADD_LISTS_REQUEST
+});
+
+const addListsSuccess = () => ({
+  type: ADD_LISTS_SUCCESS
+});
+
+const addListsFailure = (err) => ({
+  type: ADD_LISTS_FAILURE,
+  err
+});
+
+export const addList = (list) => {
+  return (dispatch) => {
+    dispatch(addListsRequest());
+    return axios.post('/api/lists', list)
+      .then(() => {
+        dispatch(addListsSuccess());
+      })
+      .then(() => {
+        dispatch(fetchLists());
+      })
+      .catch((err) => {
+        dispatch(addListsFailure(err))
+      });
+  }
+};

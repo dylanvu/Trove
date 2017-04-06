@@ -9,7 +9,7 @@ class AddBookmark extends React.Component {
     super(props);
 
     this.state = {
-      bookmarkUrl: '',
+      url: '',
       listId: '',
       listName: '',
       isOpen: false
@@ -45,12 +45,12 @@ class AddBookmark extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.addBookmark({
-      bookmarkUrl: this.state.bookmarkUrl,
+      url: this.state.url,
       listId: this.state.listId,
     });
     this.props.selectList({ name: this.state.listName, id: this.state.listId })
     this.setState({
-      bookmarkUrl: '',
+      url: '',
       listId: '',
       listName: '',
       isOpen: false
@@ -76,10 +76,10 @@ class AddBookmark extends React.Component {
           <Form>
             <Form.Group widths='equal'>
               <Form.Input
-                name='bookmarkUrl'
+                name='url'
                 placeholder='https://...'
                 label='Add:'
-                value={this.state.bookmarkUrl}
+                value={this.state.url}
                 onChange={this.handleChange}
               />
               <Form.Select

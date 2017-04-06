@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Menu } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
+import AddList from './AddList';
 import { fetchLists } from '../../actions/lists';
 import { fetchBmFromList } from '../../actions/selectList';
 
@@ -21,7 +22,8 @@ class Lists extends React.Component {
     } = this.props;
     return (
       <div>
-        <Header dividing>Lists</Header>
+        <h1>Lists</h1>
+        <AddList/>
         <Menu vertical secondary size='massive'>
           <Menu.Item>
             <Menu.Header>Private</Menu.Header>
