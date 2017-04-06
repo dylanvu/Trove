@@ -7,9 +7,6 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.get('/lists', authorize, (req, res, next) => {
   const { userId } = req.claim;
-
-  // TODO: what happens when a user shares a list?
-
   const lists = {
     defaultList: {},
     privateLists: [],
@@ -49,6 +46,23 @@ router.get('/lists', authorize, (req, res, next) => {
     .then((sharedLists) => {
       lists.sharedLists = camelizeKeys(sharedLists);
 
+      // get info of users this list has been shared to
+      const toResolve = lists.sharedLists.map((list) => {
+        return knex.select('first_name', 'last_name', 'email')
+          .from('users')
+          .innerJoin('users_lists', 'users.id', 'users_lists.user_id')
+          .where('users_lists.list_id', list.id)
+          .whereNot('users.id', userId)
+          .orderBy('first_name', 'ASC')
+      });
+
+      return Promise.all(toResolve);
+    })
+    .then((usersSharedTo) => {
+      for (let i = 0; i < usersSharedTo.length; i++) {
+        lists.sharedLists[i].sharedTo = usersSharedTo[i];
+      }
+
       res.send(lists);
     })
     .catch((err) => {
@@ -56,7 +70,6 @@ router.get('/lists', authorize, (req, res, next) => {
     });
 });
 
-// TODO: Use promise.all?
 // router.post('/list', authorize, (req, res, next) => {
 //   const { name, shared, emails } = req.body;
 //

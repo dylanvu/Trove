@@ -25,11 +25,13 @@ router.get('/bookmarks/:listId', authorize, (req, res, next) => {
 router.post('/bookmarks', authorize, (req, res, next) => {
   let { bookmarkUrl, listId } = req.body;
 
+  // TODO: Figure out the best way to handle duplicate bookmark entries.
+  // 1. Simple approach: unique per lists
+  // 2. Unique per shared list + unique across default and privatelists?
+
   if (!bookmarkUrl.match(/^[a-zA-Z]+:\/\//)) {
     bookmarkUrl = 'http://' + bookmarkUrl;
   }
-
-  // TODO: prevent duplicate bookmarks per list
 
   axios.get(bookmarkUrl)
     .then((response) => {
