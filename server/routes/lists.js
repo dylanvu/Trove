@@ -1,7 +1,9 @@
 const authorize = require('../helpers/authorize');
-const { camelizeKeys } = require('humps');
+const { camelizeKeys, decamelizeKeys } = require('humps');
 const express = require('express');
+const ev = require('express-validation');
 const knex = require('../knex');
+const validations = require('../validations/list');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -40,10 +42,10 @@ router.get('/lists', authorize, (req, res, next) => {
         .innerJoin('users_lists', 'lists.id', 'users_lists.list_id')
         .where('users_lists.user_id', userId)
         .where('lists.shared', true)
-        .whereNot('lists.id', lists.defaultList.id)
         .orderBy('lists.name', 'ASC');
     })
     .then((sharedLists) => {
+      console.log(sharedLists);
       lists.sharedLists = camelizeKeys(sharedLists);
 
       // get info of users this list has been shared to
@@ -70,10 +72,34 @@ router.get('/lists', authorize, (req, res, next) => {
     });
 });
 
-// router.post('/list', authorize, (req, res, next) => {
-//   const { name, shared, emails } = req.body;
-//
-//
-// })
+router.post('/lists', authorize, ev(validations.list), (req, res, next) => {
+  const { name, shared, emails } = req.body;
+  const userId = req.claim.userId;
+
+  console.log(name, shared, emails);
+
+  knex('lists')
+    .insert(decamelizeKeys({
+      ownerId: userId,
+      name,
+      shared
+    }), '*')
+    .then((row) => {
+      const list = row[0];
+
+      return knex('users_lists')
+        .insert(decamelizeKeys({
+          userId,
+          listId: list.id }
+        ), '*');
+    })
+    .then((row) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      next(err);
+    });
+
+});
 
 module.exports = router;

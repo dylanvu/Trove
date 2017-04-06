@@ -1,9 +1,11 @@
 const axios = require('axios');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 const express = require('express');
+const ev = require('express-validation');
 const knex = require('../knex');
 const authorize = require('../helpers/authorize');
 const parseBookmark = require('../helpers/parseBookmark');
+const validations = require('../validations/bookmark');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -22,20 +24,21 @@ router.get('/bookmarks/:listId', authorize, (req, res, next) => {
     });
 });
 
-router.post('/bookmarks', authorize, (req, res, next) => {
-  let { bookmarkUrl, listId } = req.body;
+// TODO: Re-add authorize. removed for presentation
+router.post('/bookmarks', ev(validations.bookmark), (req, res, next) => {
+  let { url, listId } = req.body;
 
   // TODO: Figure out the best way to handle duplicate bookmark entries.
   // 1. Simple approach: unique per lists
   // 2. Unique per shared list + unique across default and privatelists?
 
-  if (!bookmarkUrl.match(/^[a-zA-Z]+:\/\//)) {
-    bookmarkUrl = 'http://' + bookmarkUrl;
+  if (!url.match(/^[a-zA-Z]+:\/\//)) {
+    url = `http://${url}`;
   }
 
-  axios.get(bookmarkUrl)
+  axios.get(url)
     .then((response) => {
-      const bookmark = parseBookmark(response.data, bookmarkUrl, listId);
+      const bookmark = parseBookmark(response.data, url, listId);
 
       return knex('bookmarks')
         .insert(decamelizeKeys(bookmark), '*');
