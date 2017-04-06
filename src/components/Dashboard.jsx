@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import Lists from './Lists';
+import Lists from './lists/Lists';
 import Bookmarks from './Bookmarks';
 
 const Dashboard = () => {

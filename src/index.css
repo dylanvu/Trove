@@ -17,6 +17,10 @@ h1, h2 {
   background: none !important;
 }
 
+.card:hover * {
+  color: #AD3376 !important;
+}
+
 #truncate {
   white-space: nowrap !important;
   overflow: hidden !important;

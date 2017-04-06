@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Header, Icon, Image, Label } from 'semantic-ui-react';
 import { fetchBmFromList } from '../actions/selectList';
 
 class Bookmarks extends React.Component {
@@ -14,7 +14,13 @@ class Bookmarks extends React.Component {
     const { bookmarks, selectedList } = this.props;
     return (
       <div>
-        <h1>{selectedList.name}</h1>
+        <Header dividing>{selectedList.name}</Header>
+        <div>
+          <Label>
+            Adrienne
+            <Icon name='delete' />
+          </Label>
+        </div>
         <Card.Group>
           { bookmarks.map((bookmark) => (
             <Card
