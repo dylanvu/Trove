@@ -73,16 +73,17 @@ router.get('/lists', authorize, (req, res, next) => {
 });
 
 router.post('/lists', authorize, ev(validations.list), (req, res, next) => {
-  const { name, shared, emails } = req.body;
+  console.dir(req.body);
+  const { name } = req.body;
   const userId = req.claim.userId;
 
-  console.log(name, shared, emails);
-
+  console.log('before knex');
+  console.dir(name, userId);
   knex('lists')
     .insert(decamelizeKeys({
       ownerId: userId,
       name,
-      shared
+      // shared
     }), '*')
     .then((row) => {
       const list = row[0];
@@ -99,7 +100,6 @@ router.post('/lists', authorize, ev(validations.list), (req, res, next) => {
     .catch((err) => {
       next(err);
     });
-
 });
 
 module.exports = router;

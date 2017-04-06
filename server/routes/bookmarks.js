@@ -51,4 +51,20 @@ router.post('/bookmarks', ev(validations.bookmark), (req, res, next) => {
     });
 });
 
+router.post('/ext', (req, res, next) => {
+  console.log('body');
+  console.dir(req.body);
+  const bookmark = req.body;
+  bookmark.listId = 1;
+  knex('bookmarks')
+    .insert(decamelizeKeys(bookmark), '*')
+    .then((insertedBookmark) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.send(insertedBookmark);
+    })
+    .catch((err) => {
+      next(err);
+    });
+})
+
 module.exports = router;
