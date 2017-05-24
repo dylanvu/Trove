@@ -29,4 +29,3 @@ Future Development includes adding functionality listed below:
 - PostgreSQL
 - Knex.js
 - Cheerio
-- jQuery
